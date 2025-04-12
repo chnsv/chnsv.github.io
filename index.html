@@ -6,7 +6,6 @@
     <title>Образовательный портал</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -43,9 +42,18 @@
     <main>
         <section class="knowledge-check">
             <h2 class="title-sec">Проверьте свои знания и мы поможем подобрать курс</h2>
-            <form action="test.php" method="post">
-                <button type="submit">Начать тестирование</button>
-            </form>
+            <button id="startTest">Начать тестирование</button>
+
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Тест по математике</h1>
+                    <form id="mathTest">
+                        <div id="questions"></div>
+                    </form>
+                    <div id="result"></div>
+                </div>
+            </div>
         </section>
 
         <section class="teachers">
