@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Образовательный портал</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="site-title">МАТЕМАТИК</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">ГЛАВНАЯ</a></li>
+                    <li><a href="#">КАТАЛОГ КУРСОВ</a></li>
+                    <li>
+                        <a href="#">ШКОЛА</a>
+                        <div class="dropdown-content">
+                            <a href="#">Математика 5-6 класс</a>
+                            <a href="#">Алгебра и геометрия 7-8 класс</a>
+                        </div>
+                    </li>
+                    <li><a href="#">ОГЭ</a></li>
+                    <li><a href="#">ЕГЭ</a></li>
+                    <li>
+                        <a href="#">О НАС</a>
+                        <div class="dropdown-content">
+                            <a href="#">О сайте</a>
+                            <a href="#">Отзывы</a>
+                            <a href="#">Контакты</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+    <main>
+        <section class="knowledge-check">
+            <h2 class="title-sec">Проверьте свои знания и мы поможем подобрать курс</h2>
+            <form action="test.php" method="post">
+                <button type="submit">Начать тестирование</button>
+            </form>
+        </section>
+
+        <section class="teachers">
+            <h2 class="title-teach">Наши преподаватели</h2>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="teacher-card">
+                            <img src="teach_one.jpeg" alt="Александр Нестеров" class="teacher-photo">
+                            <h2>Александр Нестеров</h2>
+                            <p>преподает профилирующую математику ЕГЭ</p>
+                            <div class="stats">
+                                <div class="stat">
+                                    <h3>12 лет</h3>
+                                    <p>готовит к ЕГЭ</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>25</h3>
+                                    <p>стобальников</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>2 728</h3>
+                                    <p>учеников сдали на 80+</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="teacher-card">
+                            <img src="teach_two.jpg" alt="Мария Иванова" class="teacher-photo">
+                            <h2>Мария Иванова</h2>
+                            <p>преподает алгебру и геометрию</p>
+                            <div class="stats">
+                                <div class="stat">
+                                    <h3>10 лет</h3>
+                                    <p>готовит к ЕГЭ</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>30</h3>
+                                    <p>стобальников</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>3 000</h3>
+                                    <p>учеников сдали на 80+</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="teacher-card">
+                            <img src="teach_three.jpg" alt="Иван Петров" class="teacher-photo">
+                            <h2>Иван Петров</h2>
+                            <p>преподает математику и физику</p>
+                            <div class="stats">
+                                <div class="stat">
+                                    <h3>8 лет</h3>
+                                    <p>готовит к ЕГЭ</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>15</h3>
+                                    <p>стобальников</p>
+                                </div>
+                                <div class="stat">
+                                    <h3>1 500</h3>
+                                    <p>учеников сдали на 80+</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                
+            </div>
+        </section>
+
+        <section class="course-signup">
+            <div class="course-info">
+                <h1>Курсы по математике онлайн</h1>
+                <hr>
+                <h2>ПОМОГУТ</h2>
+                <p>разобраться в сложных темах</p>
+                <p>выйти на четверки пятерки</p>
+                <p>сдать экзамены на отлично.</p>
+            </div>
+            <div class="signup-form">
+                <h2>Записаться на курс</h2>
+                <form>
+                    <input type="text" id="student-name" placeholder="ФИО ученика" required>
+                    <input type="text" id="grade" placeholder="Класс" required>
+                    <input type="text" id="parent-name" placeholder="ФИО родителя"required>
+                    <input type="tel" id="phone" placeholder="+7 (___) - ___ - __ - __" required>
+                    <input type="email" id="email" placeholder="E-mail" required>
+                    <label>
+                        <input type="checkbox" required>
+                        Даю согласие на обработку персональных данных*
+                    </label>
+                    <button type="submit">Отправить заявку</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="formats">
+            <h2 class="format_info1">ФОРМАТЫ ПОДГОТОВКИ</h2>
+            <h5 class="format_info2">Выберите подходящий формат подготовки</h5>
+            <div class="formats-container">
+                <div class="format-card">
+                    <h3>Индивидуальные занятия</h3>
+                    <p>Персонализированная программа</p>
+                    <p>Гибкий график</p>
+                    <p>Интерактивные методы</p>
+                    <p>Регулярная обратная связь</p>
+                    <h4>Цена: 2000 руб./час</h4>
+                    <button>Оформить</button>
+                </div>
+                <div class="format-card">
+                    <h3>Групповые занятия</h3>
+                    <p>Обсуждение и взаимодействие</p>
+                    <p>Разнообразие методов обучения</p>
+                    <p>Социальная поддержка</p>
+                    <p>Регулярные проверки знаний</p>
+                    <h4>Цена: 1500 руб./час</h4>
+                    <button>Оформить</button>
+                </div>
+                <div class="format-card">
+                    <h3>Онлайн-курсы</h3>
+                    <p>Доступ к материалам</p>
+                    <p>Интерактивные занятия</p>
+                    <p>Разнообразие форматов</p>
+                    <p>Поддержка преподователей</p>
+                    <h4>Цена: 5000 руб./курс</h4>
+                    <button>Оформить</button>
+                </div>
+            </div>
+        </section> 
+        
+        <section class="reviews">
+            <h2>Отзывы наших учеников</h2>
+            <div class="reviews-container">
+                <div class="review-card">
+                    <p>"Занятия с Александром помогли мне подготовиться к ЕГЭ на отлично! Рекомендую!"</p>
+                    <h4>- Анна Смирнова</h4>
+                </div>
+                <div class="review-card">
+                    <p>"Мария объясняет материал очень доступно. Я стал лучше понимать алгебру!"</p>
+                    <h4>- Дмитрий Ковалев</h4>
+                </div>
+                <div class="review-card">
+                    <p>"Иван - отличный преподаватель! Успехи в математике стали заметны уже через месяц!"</p>
+                    <h4>- Ольга Петрова</h4>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2 class="zagolovok">Часто задаваемые вопросы</h2>
+            <div class="faq-item">
+                <h3 class="faq-question">Как записаться на курс?</h3>
+                <div class="faq-answer">
+                    <p>Вы можете записаться на курс, заполнив форму на нашем сайте или связавшись с нами по телефону.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Какие курсы вы предлагаете?</h3>
+                <div class="faq-answer">
+                    <p>Мы предлагаем курсы по математике, алгебре, геометрии и подготовке к экзаменам.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Какова стоимость курсов?</h3>
+                <div class="faq-answer">
+                    <p>Стоимость курсов варьируется в зависимости от формата и продолжительности. Пожалуйста, проверьте раздел "Курсы" для получения более подробной информации.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Есть ли у вас пробные занятия?</h3>
+                <div class="faq-answer">
+                    <p>Да, мы предлагаем бесплатные пробные занятия для всех новых студентов, чтобы вы могли оценить формат и содержание курса перед тем, как записаться.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Как я могу связаться с преподавателем?</h3>
+                <div class="faq-answer">
+                    <p>Студенты могут связаться с преподавателями через платформу для онлайн-занятий или по электронной почте. Мы также проводим регулярные сессии вопросов и ответов.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Что делать, если я пропустил занятие?</h3>
+                <div class="faq-answer">
+                    <p>Если вы пропустили занятие, вы сможете получить доступ к записи урока и дополнительным материалам, чтобы не отставать от программы.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Как я могу оценить свой прогресс?</h3>
+                <div class="faq-answer">
+                    <p>Мы проводим регулярные тесты и контрольные работы, а также предоставляем обратную связь по выполненным заданиям, чтобы вы могли отслеживать свой прогресс и улучшения.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Образовательный портал. Все права защищены.</p>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

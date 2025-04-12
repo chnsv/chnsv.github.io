@@ -1,0 +1,351 @@
+body {
+    font-family: 'Palatino Linotype', serif;
+    margin: 0;
+    padding: 0;
+}
+
+.test-container {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* ШАПКА */
+header {
+    background-color: #3c635f;
+    color: white;
+    padding: 10px 50px;
+    border-bottom: 2px solid #345754;
+}
+
+.header-container {
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.site-title {
+    font-size: 26px;
+    color: #ffffff;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #426a66;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    flex-direction: column;
+}
+
+nav li:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.dropdown-content a:hover {
+    background-color: #3c635f;
+}
+
+/* ТЕСТ */
+section {
+    background-color: #3c635f;
+    padding: 20px;
+    text-align: center;
+}
+
+.title-sec {
+    font-size: 36px;
+    color: #ffffff;
+}
+
+.knowledge-check button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #2f3434;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ПРЕПОДАВАТЕЛИ */
+.teachers {
+    padding: 20px;
+    text-align: center;
+}
+
+.title-teach {
+    font-size: 36px;
+    color: #ffffff;
+    border-bottom: 2px solid #345754;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 400px;
+}
+
+.teacher-card {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.teacher-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.stat p {
+    margin: 0;
+    color: #777;
+}
+
+/* ПРЕИМУЩЕСТВА И ФОРМА */
+
+.course-signup {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.course-info {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.course-info p::before{
+    content: '✓';
+    margin-right: 10px;
+}
+
+.signup-form {
+    flex: 1;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.signup-form h2 {
+    margin-top: 0;
+}
+
+.signup-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.signup-form button {
+    padding: 10px 20px;
+    background-color: #3c635f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-form button:hover {
+    background-color: #27ae60;
+}
+
+/* ФОРМАТЫ ПОДГОТОВКИ */
+.formats {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.format_info1{
+    color: #ffffff;
+}
+
+.format_info2{
+    font-weight: normal;
+    color: #ffffff;
+
+}
+.formats-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.format-card {
+    background-color: #f9f9f9;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.format-card:hover {
+    transform: scale(1.05);
+}
+
+.format-card h3 {
+    margin: 0 0 10px;
+    border-bottom: 2px solid #345754;
+}
+
+.format-card p {
+    margin: 5px 0;
+}
+.format-card p::before{
+    content: '✓';
+    margin-right: 10px;
+}
+
+.format-card button {
+    background-color: #3c635f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.format-card button:hover {
+    background-color: #27ae60;
+}
+
+/* ОТЗЫВЫ */
+.reviews {
+    background-color: #f9f9f9;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.reviews h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.reviews-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.review-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.review-card:hover {
+    transform: scale(1.05);
+}
+
+.review-card h4 {
+    margin-top: 10px;
+    font-weight: normal;
+    color: #555;
+}
+
+/* ВОПРОСЫ */
+.faq {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #3c635f;
+    text-align: left;
+}
+.zagolovok{
+    color: #ffffff;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #ddd;
+    transition: color 0.3s;
+    font-weight: normal;
+}
+
+.faq-question:hover {
+    color: #b6b8b9;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    border-left: 3px solid #000000;
+    background-color: #e9ecef;
+    margin-top: 5px;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+/* ФУТЕР */
+footer {
+    background-color: #3c635f;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
