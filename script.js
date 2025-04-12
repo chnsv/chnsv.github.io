@@ -19,14 +19,6 @@ document.querySelectorAll('.faq-question').forEach(question => {
     });
 });
 
-$(document).ready(function() {
-    $('#start-test').click(function() {
-        $.ajax({
-            url: 'test.php',
-            method: 'POST',
-            success: function(data) {
-                $('#test-container').html(data);
-            }
-        });
-    });
+document.getElementById('startTest').addEventListener('click', function() {
+    window.location.href = 'test.php'; // Перенаправление на тест
 });
