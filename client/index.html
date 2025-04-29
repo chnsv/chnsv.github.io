@@ -909,6 +909,10 @@
                             <a href="contacts.html">Контакты</a>
                         </div>
                     </li>
+                    <div id="authSection" style="margin-left: auto;">
+                        <button id="authButton" onclick="showAuthModal()">Войти</button>
+                        <a id="accountLink" href="#" style="display: none;">Личный кабинет</a>
+                    </div>
                 </ul>
             </nav>
         </div>
@@ -1227,5 +1231,20 @@
             `;
         });
     </script>
+
+    <div id="authModal" class="modal">
+      <div class="modal-content" style="max-width: 400px;">
+        <span class="close" onclick="hideAuthModal()">&times;</span>
+        <h2 style="text-align: center;">Вход в систему</h2>
+        <form id="loginForm">
+          <input type="email" id="loginEmail" placeholder="Email" required>
+          <input type="password" id="loginPassword" placeholder="Пароль" required>
+          <button type="submit" class="cta-button">Войти</button>
+        </form>
+        <p style="text-align: center; margin-top: 15px;">
+          Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a>
+        </p>
+      </div>
+    </div>
 </body>
 </html>
