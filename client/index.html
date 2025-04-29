@@ -1230,6 +1230,45 @@
                 </div>
             `;
         });
+
+        document.querySelector('.signup-form form').addEventListener('submit', async (e) => 
+        {
+          e.preventDefault();
+          
+          if (!currentUser) {
+            showAuthModal();
+            return;
+          }
+        
+          const formData = {
+            studentName: document.getElementById('student-name').value,
+            grade: document.getElementById('grade').value,
+            parentName: document.getElementById('parent-name').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value
+          };
+        
+          try {
+            const response = await fetch('/api/courses/1/apply', { // Замените 1 на ID курса
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': localStorage.getItem('token')
+              },
+              body: JSON.stringify(formData)
+            });
+            
+            if (response.ok) {
+              alert('Заявка успешно отправлена!');
+              e.target.reset();
+            } else {
+              const error = await response.json();
+              alert(`Ошибка: ${error.error || 'Неизвестная ошибка'}`);
+            }
+          } catch (error) {
+            alert('Ошибка соединения с сервером');
+          }
+        });
     </script>
 
     <div id="authModal" class="modal">
