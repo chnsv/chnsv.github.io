@@ -1175,6 +1175,37 @@
         </div>
     </footer>
 
+    <div id="authModal" class="modal">
+      <div class="modal-content" style="max-width: 400px;">
+        <span class="close" onclick="hideAuthModal()">&times;</span>
+        
+        <div id="loginFormContainer">
+          <h2 style="text-align: center;">Вход в систему</h2>
+          <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Пароль" required>
+            <button type="submit" class="cta-button">Войти</button>
+          </form>
+          <p style="text-align: center; margin-top: 15px;">
+            Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a>
+          </p>
+        </div>
+        
+        <div id="registerFormContainer" style="display: none;">
+          <h2 style="text-align: center;">Регистрация</h2>
+          <form id="registerForm">
+            <input type="email" id="registerEmail" placeholder="Email" required>
+            <input type="password" id="registerPassword" placeholder="Пароль" required>
+            <input type="password" id="registerConfirmPassword" placeholder="Подтвердите пароль" required>
+            <button type="submit" class="cta-button">Зарегистрироваться</button>
+          </form>
+          <p style="text-align: center; margin-top: 15px;">
+            Уже есть аккаунт? <a href="#" onclick="showLoginForm()">Войти</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         // Инициализация Swiper
@@ -1299,6 +1330,130 @@
         function showRegisterForm() {
             alert('Регистрация пока не реализована'); // Заглушка
         }
+
+        let currentUser = null;
+
+        // Показ формы регистрации
+        function showRegisterForm() {
+          document.getElementById('loginFormContainer').style.display = 'none';
+          document.getElementById('registerFormContainer').style.display = 'block';
+        }
+        
+        // Показ формы входа
+        function showLoginForm() {
+          document.getElementById('registerFormContainer').style.display = 'none';
+          document.getElementById('loginFormContainer').style.display = 'block';
+        }
+        
+        // Регистрация пользователя
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const email = document.getElementById('registerEmail').value;
+          const password = document.getElementById('registerPassword').value;
+          const confirmPassword = document.getElementById('registerConfirmPassword').value;
+          
+          if (password !== confirmPassword) {
+            alert('Пароли не совпадают');
+            return;
+          }
+          
+          try {
+            const response = await fetch('/api/register', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ email, password })
+            });
+            
+            if (response.ok) {
+              alert('Регистрация успешна! Теперь вы можете войти.');
+              showLoginForm();
+            } else {
+              const error = await response.json();
+              alert(error.error || 'Ошибка регистрации');
+            }
+          } catch (err) {
+            alert('Ошибка соединения с сервером');
+          }
+        });
+        
+        // Авторизация пользователя
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const email = document.getElementById('loginEmail').value;
+          const password = document.getElementById('loginPassword').value;
+          
+          try {
+            const response = await fetch('/api/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ email, password })
+            });
+            
+            if (response.ok) {
+              const data = await response.json();
+              localStorage.setItem('token', data.token);
+              currentUser = { email };
+              
+              document.getElementById('authButton').style.display = 'none';
+              document.getElementById('accountLink').style.display = 'inline';
+              document.getElementById('accountLink').textContent = email;
+              
+              hideAuthModal();
+            } else {
+              const error = await response.json();
+              alert(error.error || 'Ошибка авторизации');
+            }
+          } catch (err) {
+            alert('Ошибка соединения с сервером');
+          }
+        });
+        
+        // Отправка заявки
+        document.querySelector('.signup-form form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const token = localStorage.getItem('token');
+          if (!token) {
+            showAuthModal();
+            return;
+          }
+          
+          const formData = {
+            studentName: document.getElementById('student-name').value,
+            grade: document.getElementById('grade').value,
+            parentName: document.getElementById('parent-name').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            courseId: 1 // Здесь можно добавить выбор курса
+          };
+          
+          try {
+            const response = await fetch('/api/applications', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': token
+              },
+              body: JSON.stringify(formData)
+            });
+            
+            if (response.ok) {
+              alert('Заявка успешно отправлена!');
+              e.target.reset();
+            } else {
+              const error = await response.json();
+              alert(`Ошибка: ${error.error || 'Неизвестная ошибка'}`);
+            }
+          } catch (error) {
+            alert('Ошибка соединения с сервером');
+          }
+        });
     </script>
 
     <div id="authModal" class="modal">
