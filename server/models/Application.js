@@ -1,13 +1,25 @@
 module.exports = (sequelize, DataTypes) => {
   const Application = sequelize.define('Application', {
-    studentName: DataTypes.STRING,
-    grade: DataTypes.STRING,
+    studentName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    grade: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     parentName: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    email: DataTypes.STRING,
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     status: {
-      type: DataTypes.ENUM('pending', 'approved', 'rejected'),
-      defaultValue: 'pending'
+      type: DataTypes.STRING,
+      defaultValue: 'new'
     }
   });
 
