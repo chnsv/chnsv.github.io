@@ -881,6 +881,20 @@
             font-size: 22px;
         }
     }
+        #authButton {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #authButton:hover {
+            background-color: var(--primary-color);
+        }
     </style>
 </head>
 <body>
@@ -909,10 +923,12 @@
                             <a href="contacts.html">Контакты</a>
                         </div>
                     </li>
-                    <div id="authSection" style="margin-left: auto;">
-                        <button id="authButton" onclick="showAuthModal()">Войти</button>
-                        <a id="accountLink" href="#" style="display: none;">Личный кабинет</a>
-                    </div>
+                    <li>
+                        <div id="authSection" style="margin-left: auto;">
+                            <button id="authButton" onclick="showAuthModal()">Войти</button>
+                            <a id="accountLink" href="#" style="display: none;">Личный кабинет</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -1269,6 +1285,20 @@
             alert('Ошибка соединения с сервером');
           }
         });
+        // Показ модального окна авторизации
+        function showAuthModal() {
+            document.getElementById('authModal').style.display = 'block';
+        }
+        
+        // Скрытие модального окна
+        function hideAuthModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+        
+        // Переключение на форму регистрации (если нужно)
+        function showRegisterForm() {
+            alert('Регистрация пока не реализована'); // Заглушка
+        }
     </script>
 
     <div id="authModal" class="modal">
