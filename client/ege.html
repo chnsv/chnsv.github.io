@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка к ЕГЭ по математике | Образовательный портал</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили */
+        :root {
+            --primary-dark: #345754;
+            --primary-medium: #5b9893;
+            --primary-light: #8abeb9;
+            --primary-extra-light: #d1e9e7;
+            --accent: #f5a623;
+            --text-dark: #2d3748;
+            --text-medium: #4a5568;
+            --text-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Шапка страницы */
+        .ege-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 3rem;
+            padding: 50px;
+        }
+        
+        .ege-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.1)">∫</text><text x="70" y="50" font-family="Arial" font-size="14" fill="rgba(255,255,255,0.1)">∑</text><text x="30" y="80" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.1)">∛</text></svg>');
+            opacity: 0.2;
+        }
+        
+        .ege-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .ege-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Основное содержимое */
+        .ege-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
+        }
+        
+        /* Блок с уровнями экзамена */
+        .exam-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .level-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        
+        .level-card.profile {
+            border-top-color: var(--primary-dark);
+        }
+        
+        .level-card.basic {
+            border-top-color: var(--primary-medium);
+        }
+        
+        .level-card h2 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        
+        .level-card.basic h2 {
+            color: var(--primary-medium);
+        }
+        
+        .level-card .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin: 1rem 0;
+        }
+        
+        .level-card.basic .price {
+            color: var(--primary-medium);
+        }
+        
+        .level-card ul {
+            padding-left: 20px;
+        }
+        
+        .level-card li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        .level-card li::before {
+            content: "→";
+            position: absolute;
+            left: -20px;
+            color: var(--primary-medium);
+        }
+        
+        .level-card.profile li::before {
+            color: var(--primary-dark);
+        }
+        
+        .level-card .btn {
+            display: inline-block;
+            background: var(--primary-medium);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .level-card.profile .btn {
+            background: var(--primary-dark);
+        }
+        
+        .level-card .btn:hover {
+            background: white;
+            color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .level-card.profile .btn:hover {
+            color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        /* Блок с разделами подготовки */
+        .sections-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+        
+        .sections-container h2 {
+            color: var(--primary-dark);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+        }
+        
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .section-card {
+            background: var(--primary-extra-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-card h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-card h3::before {
+            content: "";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background-color: var(--primary-dark);
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>');
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+        
+        /* Блок с вариантами */
+        .variants-section {
+            margin-bottom: 4rem;
+        }
+        
+        .variants-section h2 {
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+        }
+        
+        .variant-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .variant-tab {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid var(--primary-medium);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: var(--primary-medium);
+        }
+        
+        .variant-tab:hover {
+            background: var(--primary-extra-light);
+        }
+        
+        .variant-tab.active {
+            background: var(--primary-medium);
+            color: white;
+        }
+        
+        .variant-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .variant-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary-medium);
+        }
+        
+        .variant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .variant-card h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        .variant-card .meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        
+        .variant-card .btn {
+            display: inline-block;
+            background: var(--primary-medium);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .variant-card .btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Блок с таймером и статистикой */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .countdown-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: white;
+        }
+        
+        .countdown-card h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        
+        .timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .stats-card h2 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .stat-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-item h3 {
+            color: var(--primary-medium);
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: var(--primary-extra-light);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--primary-medium);
+            border-radius: 5px;
+        }
+        
+        /* Форма регистрации */
+        .signup-section {
+            background: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .signup-section h2 {
+            color: var(--primary-dark);
+            text-align: center;
+            margin-top: 0;
+            font-size: 2rem;
+        }
+        
+        .signup-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary-medium);
+            outline: none;
+        }
+        
+        .form-submit {
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background: var(--primary-medium);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            min-width: 200px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .ege-header {
+                padding: 3rem 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .ege-header h1 {
+                font-size: 2rem;
+            }
+            
+            .ege-header p {
+                font-size: 1.1rem;
+            }
+            
+            .signup-section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="site-title">МАТЕМАТИК</h1>
+            <div class="burger-menu" onclick="toggleMenu()">☰</div>
+            <nav id="nav-menu" class="nav-hidden">
+                <ul>
+                    <li><a href="index.html">ГЛАВНАЯ</a></li>
+                    <li><a href="catalog.html">КАТАЛОГ КУРСОВ</a></li>
+                    <li>
+                        <a href="school.html">ШКОЛА</a>
+                        <div class="dropdown-content">
+                            <a href="math-5-6.html">Математика 5-6 класс</a>
+                            <a href="algebra-7-8.html">Алгебра и геометрия 7-8 класс</a>
+                        </div>
+                    </li>
+                    <li><a href="oge.html">ОГЭ</a></li>
+                    <li><a href="ege.html">ЕГЭ</a></li>
+                    <li>
+                        <a href="about.html">О НАС</a>
+                        <div class="dropdown-content">
+                            <a href="about-site.html">О сайте</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contacts.html">Контакты</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header> 
+
+    <div class="ege-header">
+        <h1>Подготовка к ЕГЭ по математике</h1>
+        <p>Профессиональная подготовка к единому государственному экзамену профильного и базового уровней</p>
+    </div>
+
+    <main class="ege-container">
+        <section class="exam-levels">
+            <div class="level-card profile">
+                <h2>Профильный уровень</h2>
+                <div class="price">от 3 500 ₽/мес</div>
+                <ul>
+                    <li>19 заданий повышенной сложности</li>
+                    <li>Подготовка к топовым вузам</li>
+                    <li>Разбор всех типов задач</li>
+                    <li>Персональный куратор</li>
+                    <li>Доступ к закрытым материалам</li>
+                </ul>
+                <a href="#" class="btn">Выбрать курс</a>
+            </div>
+            
+            <div class="level-card basic">
+                <h2>Базовый уровень</h2>
+                <div class="price">от 2 500 ₽/мес</div>
+                <ul>
+                    <li>21 задание базовой сложности</li>
+                    <li>Гарантированная сдача экзамена</li>
+                    <li>Понятное объяснение</li>
+                    <li>Групповые занятия</li>
+                    <li>Тесты и проверка знаний</li>
+                </ul>
+                <a href="#" class="btn">Выбрать курс</a>
+            </div>
+        </section>
+
+        <section class="sections-container">
+            <h2>Программа подготовки</h2>
+            
+            <div class="sections-grid">
+                <div class="section-card">
+                    <h3>Алгебра</h3>
+                    <p>Уравнения, неравенства, системы, прогрессии, логарифмы, тригонометрия</p>
+                </div>
+                
+                <div class="section-card">
+                    <h3>Геометрия</h3>
+                    <p>Планиметрия, стереометрия, векторы, координаты, доказательства</p>
+                </div>
+                
+                <div class="section-card">
+                    <h3>Начала анализа</h3>
+                    <p>Производные, интегралы, исследование функций, задачи с параметрами</p>
+                </div>
+                
+                <div class="section-card">
+                    <h3>Теория вероятностей</h3>
+                    <p>Комбинаторика, статистика, случайные события, законы распределения</p>
+                </div>
+                
+                <div class="section-card">
+                    <h3>Задачи с экономическим содержанием</h3>
+                    <p>Кредиты, вклады, оптимизация, процентные расчеты</p>
+                </div>
+                
+                <div class="section-card">
+                    <h3>Практико-ориентированные задачи</h3>
+                    <p>Работа с графиками, таблицами, реальными ситуациями</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="variants-section">
+            <h2>Тренировочные варианты</h2>
+            
+            <div class="variant-tabs">
+                <div class="variant-tab active">Все варианты</div>
+                <div class="variant-tab">Профильный уровень</div>
+                <div class="variant-tab">Базовый уровень</div>
+                <div class="variant-tab">По темам</div>
+                <div class="variant-tab">Демоверсии</div>
+            </div>
+            
+            <div class="variant-cards">
+                <div class="variant-card">
+                    <h3>Профильный вариант №1</h3>
+                    <div class="meta">
+                        <span>19 заданий</span>
+                        <span>235 мин</span>
+                    </div>
+                    <p>Полный вариант профильного уровня с разбором всех задач</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Базовый вариант №1</h3>
+                    <div class="meta">
+                        <span>21 задание</span>
+                        <span>180 мин</span>
+                    </div>
+                    <p>Стандартный вариант базового уровня ЕГЭ</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Задачи с параметрами</h3>
+                    <div class="meta">
+                        <span>8 заданий</span>
+                        <span>90 мин</span>
+                    </div>
+                    <p>Специальный тест по сложным задачам с параметрами</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Демоверсия 2025</h3>
+                    <div class="meta">
+                        <span>19 заданий</span>
+                        <span>235 мин</span>
+                    </div>
+                    <p>Официальный демонстрационный вариант от ФИПИ</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Стереометрия</h3>
+                    <div class="meta">
+                        <span>5 заданий</span>
+                        <span>60 мин</span>
+                    </div>
+                    <p>Задачи по геометрии в пространстве с подробным разбором</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Экономические задачи</h3>
+                    <div class="meta">
+                        <span>4 задания</span>
+                        <span>45 мин</span>
+                    </div>
+                    <p>Тренировка по задачам на кредиты, вклады и оптимизацию</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="countdown-card">
+                <h2>До ЕГЭ осталось:</h2>
+                <div class="timer" id="countdown-timer">148 дней 06:45:32</div>
+                <p>Не откладывайте подготовку на потом!</p>
+            </div>
+            
+            <div class="stats-card">
+                <h2>Ваша статистика</h2>
+                <div class="stat-item">
+                    <h3>Прохождение курса</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 35%;"></div>
+                    </div>
+                    <span>35% завершено</span>
+                </div>
+                
+                <div class="stat-item">
+                    <h3>Средний балл</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 62%;"></div>
+                    </div>
+                    <span>62 из 100</span>
+                </div>
+                
+                <div class="stat-item">
+                    <h3>Решенные задачи</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 78%;"></div>
+                    </div>
+                    <span>78 из 100</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="signup-section">
+            <h2>Записаться на интенсив</h2>
+            <form class="signup-form">
+                <div class="form-group">
+                    <label for="fullname">ФИО ученика</label>
+                    <input type="text" id="fullname" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="level">Уровень подготовки</label>
+                    <select id="level" required>
+                        <option value="">Выберите уровень</option>
+                        <option value="basic">Базовый</option>
+                        <option value="profile">Профильный</option>
+                        <option value="both">Оба уровня</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="goal">Цель на ЕГЭ (баллы)</label>
+                    <input type="number" id="goal" min="0" max="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Дополнительная информация</label>
+                    <textarea id="message" rows="3"></textarea>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="submit-btn">Записаться сейчас</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Образовательный портал. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Таймер обратного отсчета
+        function updateCountdown() {
+            const examDate = new Date('2025-06-02T10:00:00');
+            const now = new Date();
+            const diff = examDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown-timer').textContent = 
+                `${days} дней ${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Запускаем таймер сразу и обновляем каждую секунду
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Табы для вариантов
+        document.querySelectorAll('.variant-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.variant-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // Здесь можно добавить фильтрацию вариантов
+            });
+        });
+    </script>
+</body>
+</html>

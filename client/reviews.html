@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы | Образовательный портал по математике</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили */
+        :root {
+            --primary-dark: #345754;
+            --primary-medium: #5b9893;
+            --primary-light: #8abeb9;
+            --primary-extra-light: #d1e9e7;
+            --accent: #f5a623;
+            --text-dark: #2d3748;
+            --text-medium: #4a5568;
+            --text-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Шапка страницы */
+        .reviews-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 3rem;
+        }
+        
+        .reviews-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.1)">“</text><text x="70" y="50" font-family="Arial" font-size="14" fill="rgba(255,255,255,0.1)">”</text><text x="30" y="80" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.1)">★</text></svg>');
+            opacity: 0.2;
+        }
+        
+        .reviews-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .reviews-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Основное содержимое */
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+        
+        /* Фильтры отзывов */
+        .reviews-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid var(--primary-medium);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: var(--primary-medium);
+        }
+        
+        .filter-btn:hover {
+            background: var(--primary-extra-light);
+        }
+        
+        .filter-btn.active {
+            background: var(--primary-medium);
+            color: white;
+        }
+        
+        /* Список отзывов */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .review-card::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-extra-light);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .review-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .review-rating {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .star {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-right: 0.2rem;
+        }
+        
+        .review-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .review-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-extra-light);
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-medium);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .author-info h3 {
+            margin: 0;
+            color: var(--primary-dark);
+        }
+        
+        .author-info p {
+            margin: 0;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+        
+        .review-course {
+            display: inline-block;
+            background: var(--primary-extra-light);
+            color: var(--primary-medium);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Форма добавления отзыва */
+        .add-review {
+            background: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .add-review h2 {
+            color: var(--primary-dark);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .rating-select {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .rating-select input {
+            display: none;
+        }
+        
+        .rating-select label {
+            font-size: 1.5rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .rating-select input:checked ~ label {
+            color: var(--accent);
+        }
+        
+        .rating-select label:hover,
+        .rating-select label:hover ~ label {
+            color: var(--accent);
+        }
+        
+        .submit-btn {
+            background: var(--primary-medium);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .reviews-header {
+                padding: 3rem 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .reviews-header h1 {
+                font-size: 2rem;
+            }
+            
+            .reviews-header p {
+                font-size: 1.1rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .add-review {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="site-title">МАТЕМАТИК</h1>
+            <div class="burger-menu" onclick="toggleMenu()">☰</div>
+            <nav id="nav-menu" class="nav-hidden">
+                <ul>
+                    <li><a href="index.html">ГЛАВНАЯ</a></li>
+                    <li><a href="catalog.html">КАТАЛОГ КУРСОВ</a></li>
+                    <li>
+                        <a href="school.html">ШКОЛА</a>
+                        <div class="dropdown-content">
+                            <a href="math-5-6.html">Математика 5-6 класс</a>
+                            <a href="algebra-7-8.html">Алгебра и геометрия 7-8 класс</a>
+                        </div>
+                    </li>
+                    <li><a href="oge.html">ОГЭ</a></li>
+                    <li><a href="ege.html">ЕГЭ</a></li>
+                    <li>
+                        <a href="about.html">О НАС</a>
+                        <div class="dropdown-content">
+                            <a href="about-site.html">О сайте</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contacts.html">Контакты</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="reviews-header">
+        <h1>Отзывы наших учеников</h1>
+        <p>Реальные истории успеха и впечатления от обучения на нашем портале</p>
+    </div>
+
+    <main class="reviews-container">
+        <div class="reviews-filters">
+            <button class="filter-btn active">Все отзывы</button>
+            <button class="filter-btn">ОГЭ</button>
+            <button class="filter-btn">ЕГЭ</button>
+            <button class="filter-btn">Школьные курсы</button>
+            <button class="filter-btn">Преподаватели</button>
+        </div>
+        
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="review-text">
+                        "Благодаря курсам подготовки к ЕГЭ на этом сайте я смогла сдать математику на 94 балла! Преподаватели объясняют сложные темы очень доступно, а система повторения помогает закрепить материал. Особенно полезными были разборы задач второй части."
+                    </div>
+                    <div class="review-author">
+                        <div class="author-avatar">АС</div>
+                        <div class="author-info">
+                            <h3>Анна Смирнова</h3>
+                            <p>Выпускница 2024 года</p>
+                            <span class="review-course">ЕГЭ профиль</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="review-text">
+                        "Мой сын занимался с Александром Нестеровым весь 8 класс. Результаты превзошли все ожидания - с троек по алгебре вышли на твердые четверки! Преподаватель умеет заинтересовать и найти подход к подростку. Будем продолжать занятия в 9 классе для подготовки к ОГЭ."
+                    </div>
+                    <div class="review-author">
+                        <div class="author-avatar">ОК</div>
+                        <div class="author-info">
+                            <h3>Ольга Ковалева</h3>
+                            <p>Мама ученика 8 класса</p>
+                            <span class="review-course">Алгебра 8 класс</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">☆</span>
+                    </div>
+                    <div class="review-text">
+                        "Отличный сайт для подготовки к ОГЭ! Прошел полный курс за 9 месяцев, сдал на 5. Особенно понравились практические задания с автоматической проверкой и видеоразборы ошибок. Единственное - иногда не хватало оперативной обратной связи от преподавателей."
+                    </div>
+                    <div class="review-author">
+                        <div class="author-avatar">ДП</div>
+                        <div class="author-info">
+                            <h3>Дмитрий Петров</h3>
+                            <p>Ученик 9 класса</p>
+                            <span class="review-course">ОГЭ 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="review-text">
+                        "Занималась геометрией с Марией Ивановой. Наконец-то разобралась с задачами на доказательство! Преподаватель объясняет очень четко и терпеливо, всегда отвечает на вопросы. За полгода занятий мой уровень понимания геометрии вырос в разы."
+                    </div>
+                    <div class="review-author">
+                        <div class="author-avatar">ЕВ</div>
+                        <div class="author-info">
+                            <h3>Елена Васильева</h3>
+                            <p>Ученица 10 класса</p>
+                            <span class="review-course">Геометрия 10 класс</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <div class="review-text">
+                        "После двух месяцев занятий на курсе 'Задачи с параметрами' я наконец перестал бояться этих заданий в ЕГЭ. Иван Петров объясняет сложные вещи простым языком, приводит понятные аналогии. Результат - 18 баллов из 18 за задачи с параметрами на пробном ЕГЭ!"
+                    </div>
+                    <div class="review-author">
+                        <div class="author-avatar">АМ</div>
+                        <div class="author-info">
+                            <h3>Артем Морозов</h3>
+                            <p>Ученик 11 класса</p>
+                            <span class="review-course">ЕГЭ профиль</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-rating">
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                        <span class="star">☆</span>
+                    </div>
+                    <div class="review-text">
+                        "Хороший курс по теории вероятностей для подготовки к ЕГЭ. Понравилась систематизация материала и множество примеров из реальных вариантов. Хотелось бы больше интерактивных заданий и симуляторов вероятностных экспериментов."
+                    </div>
+                    <div class="review-author">
+                        <div class="author-avatar">СЗ</div>
+                        <div class="author-info">
+                            <h3>Светлана Зайцева</h3>
+                            <p>Ученица 11 класса</p>
+                            <span class="review-course">Теория вероятностей</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="add-review">
+            <h2>Оставьте свой отзыв</h2>
+            <form>
+                <div class="form-group">
+                    <label for="review-name">Ваше имя</label>
+                    <input type="text" id="review-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-email">Email (не публикуется)</label>
+                    <input type="email" id="review-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-course">Курс/Преподаватель</label>
+                    <select id="review-course" required>
+                        <option value="">Выберите курс</option>
+                        <option value="oge">Подготовка к ОГЭ</option>
+                        <option value="ege-base">ЕГЭ базовый уровень</option>
+                        <option value="ege-profile">ЕГЭ профильный уровень</option>
+                        <option value="5-6">Математика 5-6 класс</option>
+                        <option value="7-8">Алгебра и геометрия 7-8 класс</option>
+                        <option value="nesterov">Александр Нестеров</option>
+                        <option value="ivanova">Мария Иванова</option>
+                        <option value="petrov">Иван Петров</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Оценка</label>
+                    <div class="rating-select">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-text">Ваш отзыв</label>
+                    <textarea id="review-text" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Отправить отзыв</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Образовательный портал. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Фильтрация отзывов
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Здесь можно добавить логику фильтрации
+            });
+        });
+        
+        // Рейтинг звездами
+        document.querySelectorAll('.rating-select input').forEach(star => {
+            star.addEventListener('change', function() {
+                const rating = this.value;
+                const stars = this.parentNode.querySelectorAll('label');
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.style.color = 'var(--accent)';
+                    } else {
+                        s.style.color = '#ddd';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
