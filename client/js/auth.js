@@ -1,6 +1,72 @@
 let currentUser = null;
 
-async function login(email, password) {
+function showAuthModal() {
+  document.getElementById('authModal').style.display = 'block';
+}
+
+function hideAuthModal() {
+  document.getElementById('authModal').style.display = 'none';
+}
+
+function showRegisterForm() {
+  document.getElementById('loginFormContainer').style.display = 'none';
+  document.getElementById('registerFormContainer').style.display = 'block';
+}
+
+function showLoginForm() {
+  document.getElementById('registerFormContainer').style.display = 'none';
+  document.getElementById('loginFormContainer').style.display = 'block';
+}
+
+// Регистрация пользователя
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const email = document.getElementById('registerEmail').value;
+  const password = document.getElementById('registerPassword').value;
+  const confirmPassword = document.getElementById('registerConfirmPassword').value;
+  
+  if (password !== confirmPassword) {
+    alert('Пароли не совпадают');
+    return;
+  }
+  
+  try {
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      currentUser = { email };
+      
+      document.getElementById('authButton').style.display = 'none';
+      document.getElementById('accountLink').style.display = 'inline';
+      document.getElementById('accountLink').textContent = email;
+      
+      hideAuthModal();
+      alert('Регистрация успешна!');
+    } else {
+      const error = await response.json();
+      alert(error.error || 'Ошибка регистрации');
+    }
+  } catch (err) {
+    alert('Ошибка соединения с сервером');
+  }
+});
+
+// Авторизация пользователя
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  
   try {
     const response = await fetch('/api/auth/login', {
       method: 'POST',
@@ -10,80 +76,31 @@ async function login(email, password) {
       body: JSON.stringify({ email, password })
     });
     
-    const data = await response.json();
-    
     if (response.ok) {
+      const data = await response.json();
       localStorage.setItem('token', data.token);
       currentUser = data.user;
-      updateAuthUI();
+      
+      document.getElementById('authButton').style.display = 'none';
+      document.getElementById('accountLink').style.display = 'inline';
+      document.getElementById('accountLink').textContent = currentUser.email;
+      
       hideAuthModal();
     } else {
-      alert(data.error || 'Ошибка авторизации');
+      const error = await response.json();
+      alert(error.error || 'Ошибка авторизации');
     }
-  } catch (error) {
+  } catch (err) {
     alert('Ошибка соединения с сервером');
   }
-}
-
-function logout() {
-  localStorage.removeItem('token');
-  currentUser = null;
-  updateAuthUI();
-  window.location.href = 'index.html';
-}
-
-function updateAuthUI() {
-  const authButton = document.getElementById('authButton');
-  const accountLink = document.getElementById('accountLink');
-  
-  if (currentUser) {
-    authButton.style.display = 'none';
-    accountLink.style.display = 'inline-block';
-    accountLink.textContent = currentUser.role === 'admin' ? 'Админ-панель' : 'Личный кабинет';
-    accountLink.href = currentUser.role === 'admin' ? 'admin.html' : 'account.html';
-  } else {
-    authButton.style.display = 'inline-block';
-    accountLink.style.display = 'none';
-  }
-}
-
-async function checkAuth() {
-  const token = localStorage.getItem('token');
-  if (token) {
-    try {
-      const response = await fetch('/api/auth/profile', {
-        headers: {
-          'x-access-token': token
-        }
-      });
-      
-      if (response.ok) {
-        currentUser = await response.json();
-        updateAuthUI();
-      }
-    } catch (error) {
-      console.error('Auth check failed:', error);
-    }
-  }
-}
-
-// Инициализация
-document.addEventListener('DOMContentLoaded', () => {
-  checkAuth();
-  
-  // Обработчик формы входа
-  document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    await login(email, password);
-  });
 });
 
-function showAuthModal() {
-  document.getElementById('authModal').style.display = 'block';
-}
-
-function hideAuthModal() {
-  document.getElementById('authModal').style.display = 'none';
-}
+// Проверка авторизации при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    // Здесь можно добавить запрос для проверки токена
+    document.getElementById('authButton').style.display = 'none';
+    document.getElementById('accountLink').style.display = 'inline';
+  }
+});
