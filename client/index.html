@@ -1415,9 +1415,8 @@
         });
         
         // Отправка заявки
-        document.querySelector('.signup-form form').addEventListener('submit', async (e) => {
-          e.preventDefault();
-          
+        document.querySelector('.signup-form form').addEventListener('submit', async (e) => { e.preventDefault();
+  
           const token = localStorage.getItem('token');
           if (!token) {
             showAuthModal();
@@ -1430,7 +1429,7 @@
             parentName: document.getElementById('parent-name').value,
             phone: document.getElementById('phone').value,
             email: document.getElementById('email').value,
-            courseId: 1 // Здесь можно добавить выбор курса
+            CourseId: 1 // Здесь можно добавить выбор курса
           };
           
           try {
@@ -1455,20 +1454,5 @@
           }
         });
     </script>
-
-    <div id="authModal" class="modal">
-      <div class="modal-content" style="max-width: 400px;">
-        <span class="close" onclick="hideAuthModal()">&times;</span>
-        <h2 style="text-align: center;">Вход в систему</h2>
-        <form id="loginForm">
-          <input type="email" id="loginEmail" placeholder="Email" required>
-          <input type="password" id="loginPassword" placeholder="Пароль" required>
-          <button type="submit" class="cta-button">Войти</button>
-        </form>
-        <p style="text-align: center; margin-top: 15px;">
-          Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a>
-        </p>
-      </div>
-    </div>
 </body>
 </html>
