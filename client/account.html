@@ -1019,5 +1019,66 @@
         </div>
     </main>
     <script src="js/account.js"></script>
+    <script>
+    async function loadUserApplications() {
+      try {
+        const response = await fetch('/api/courses/user/applications', {
+          headers: {
+            'x-access-token': localStorage.getItem('token')
+          }
+        });
+        
+        if (response.ok) {
+          const applications = await response.json();
+          const list = document.getElementById('applicationsList');
+          
+          if (applications.length === 0) {
+            list.innerHTML = '<p>У вас нет активных заявок</p>';
+            return;
+          }
+          
+          let html = '<table><tr><th>Курс</th><th>Статус</th><th>Дата</th></tr>';
+          
+          applications.forEach(app => {
+            html += `
+              <tr>
+                <td>${app.Course?.title || 'Неизвестный курс'}</td>
+                <td>${getStatusText(app.status)}</td>
+                <td>${new Date(app.createdAt).toLocaleDateString()}</td>
+              </tr>
+            `;
+          });
+          
+          html += '</table>';
+          list.innerHTML = html;
+        }
+      } catch (error) {
+        console.error('Error loading applications:', error);
+      }
+    }
+    
+    function getStatusText(status) {
+      const statuses = {
+        'pending': 'Ожидает рассмотрения',
+        'approved': 'Одобрена',
+        'rejected': 'Отклонена'
+      };
+      return statuses[status] || status;
+    }
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      await checkAuth();
+      
+      if (!currentUser) {
+        window.location.href = 'index.html';
+        return;
+      }
+      
+      document.getElementById('userName').textContent = currentUser.name;
+      document.getElementById('userEmail').textContent = currentUser.email;
+      
+      await loadUserApplications();
+    });
+    </script>
 </body>
 </html>
