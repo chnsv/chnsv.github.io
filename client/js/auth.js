@@ -16,45 +16,37 @@ async function login(email, password) {
       localStorage.setItem('token', data.token);
       currentUser = data.user;
       updateAuthUI();
-      
-      // Перенаправление для админа
-      if (currentUser.role === 'admin') {
-        window.location.href = 'admin.html';
-      } else {
-        window.location.href = 'account.html';
-      }
+      hideAuthModal();
     } else {
-      showError(data.error);
+      alert(data.error || 'Ошибка авторизации');
     }
   } catch (error) {
-    showError('Ошибка соединения');
+    alert('Ошибка соединения с сервером');
   }
 }
 
 function logout() {
   localStorage.removeItem('token');
   currentUser = null;
+  updateAuthUI();
   window.location.href = 'index.html';
 }
 
 function updateAuthUI() {
-  const authSection = document.getElementById('auth-section');
-  const accountLink = document.getElementById('account-link');
+  const authButton = document.getElementById('authButton');
+  const accountLink = document.getElementById('accountLink');
   
   if (currentUser) {
-    authSection.innerHTML = `
-      <span>Привет, ${currentUser.name}</span>
-      <button onclick="logout()">Выйти</button>
-    `;
-    
-    if (accountLink) {
-      accountLink.href = currentUser.role === 'admin' ? 'admin.html' : 'account.html';
-      accountLink.textContent = currentUser.role === 'admin' ? 'Админ-панель' : 'Личный кабинет';
-    }
+    authButton.style.display = 'none';
+    accountLink.style.display = 'inline-block';
+    accountLink.textContent = currentUser.role === 'admin' ? 'Админ-панель' : 'Личный кабинет';
+    accountLink.href = currentUser.role === 'admin' ? 'admin.html' : 'account.html';
+  } else {
+    authButton.style.display = 'inline-block';
+    accountLink.style.display = 'none';
   }
 }
 
-// Проверка авторизации при загрузке страницы
 async function checkAuth() {
   const token = localStorage.getItem('token');
   if (token) {
@@ -75,5 +67,23 @@ async function checkAuth() {
   }
 }
 
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', checkAuth);
+// Инициализация
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth();
+  
+  // Обработчик формы входа
+  document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    await login(email, password);
+  });
+});
+
+function showAuthModal() {
+  document.getElementById('authModal').style.display = 'block';
+}
+
+function hideAuthModal() {
+  document.getElementById('authModal').style.display = 'none';
+}
