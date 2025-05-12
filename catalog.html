@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог курсов | Образовательный портал по математике</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap">
+    <style>
+        /* Основные стили */
+        :root {
+            --primary-dark: #345754;
+            --primary-medium: #5b9893;
+            --primary-light: #8abeb9;
+            --primary-extra-light: #d1e9e7;
+            --accent: #f5a623;
+            --text-dark: #2d3748;
+            --text-medium: #4a5568;
+            --text-light: #f8f9fa;
+            --primary-color: #345754;
+            --secondary-color: #5b9893;
+            --accent-color: #f5a623;
+            --light-color: #e8f4f3;
+            --dark-color: #2a4745;
+            --text-color: #333;
+            --text-light-color: #777;
+            --white: #ffffff;
+            --gray: #f5f7fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--gray);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .site-title {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .burger-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            position: relative;
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        li:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Основное содержимое */
+        main {
+            margin-top: 80px;
+        }
+
+        /* Шапка страницы */
+        .catalog-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 3rem;
+        }
+        
+        .catalog-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.1)">∫</text><text x="70" y="50" font-family="Arial" font-size="14" fill="rgba(255,255,255,0.1)">∑</text><text x="30" y="80" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.1)">π</text></svg>');
+            opacity: 0.2;
+        }
+        
+        .catalog-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .catalog-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Основное содержимое */
+        .catalog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+        
+        /* Фильтры курсов */
+        .catalog-filters {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+        
+        .filter-group h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-option input {
+            margin-right: 0.5rem;
+        }
+        
+        .filter-option label {
+            cursor: pointer;
+        }
+        
+        .reset-filters {
+            background: none;
+            border: none;
+            color: var(--primary-medium);
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            padding: 0;
+        }
+        
+        /* Список курсов */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .course-image {
+            height: 200px;
+            background: var(--primary-extra-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-medium);
+            font-size: 1.5rem;
+            position: relative;
+        }
+        
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-level {
+            display: inline-block;
+            background: var(--primary-extra-light);
+            color: var(--primary-medium);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .course-title {
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .course-description {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+        
+        .course-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .course-price s {
+            font-size: 1rem;
+            color: var(--text-medium);
+            margin-right: 0.5rem;
+        }
+        
+        .course-btn {
+            background: var(--primary-medium);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .course-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Пагинация */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+        
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .page-link:hover {
+            background: var(--primary-extra-light);
+        }
+        
+        .page-link.active {
+            background: var(--primary-medium);
+            color: white;
+        }
+        
+        /* Блок с преимуществами */
+        .benefits-section {
+            background: var(--primary-extra-light);
+            border-radius: 10px;
+            padding: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+        
+        .benefits-section h2 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            padding: 1rem;
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--primary-medium);
+            font-size: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .benefit-card h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+        }
+
+        /* Кнопка авторизации */
+        #authButton {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #authButton:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                transform: translateY(-150%);
+                transition: transform 0.3s;
+            }
+            
+            nav.nav-visible {
+                transform: translateY(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                padding-left: 15px;
+            }
+            
+            .catalog-header {
+                padding: 3rem 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .catalog-header h1 {
+                font-size: 2rem;
+            }
+            
+            .catalog-header p {
+                font-size: 1.1rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 10px 0;
+            }
+            
+            .site-title {
+                font-size: 22px;
+            }
+            
+            .catalog-header {
+                padding: 60px 0;
+            }
+            
+            .catalog-header h1 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .catalog-header p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+            
+            section {
+                padding: 50px 0;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .catalog-header h1 {
+                font-size: 22px;
+            }
+            
+            .site-title {
+                font-size: 20px;
+            }
+        }
+
+        .course-image {
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container container">
+            <h1 class="site-title">МАТЕМАТИК</h1>
+            <div class="burger-menu" onclick="toggleMenu()">☰</div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="index.html">ГЛАВНАЯ</a></li>
+                    <li><a href="catalog.html">КАТАЛОГ КУРСОВ</a></li>
+                    <li>
+                        <a href="#">ШКОЛА</a>
+                        <div class="dropdown-content">
+                            <a href="math-5-6.html">Математика 5-6 класс</a>
+                            <a href="algebra-7-8.html">Алгебра и геометрия 7-8 класс</a>
+                        </div>
+                    </li>
+                    <li><a href="oge.html">ОГЭ</a></li>
+                    <li><a href="ege.html">ЕГЭ</a></li>
+                    <li>
+                        <a href="#">О НАС</a>
+                        <div class="dropdown-content">
+                            <a href="about-site.html">О сайте</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contacts.html">Контакты</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="catalog-header">
+            <h1>Каталог курсов</h1>
+            <p>Выберите подходящий курс для эффективной подготовки по математике</p>
+        </div>
+
+        <div class="catalog-container">
+            <section class="catalog-filters">
+                <h2>Подобрать курс</h2>
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <h3>Категория</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="category-school" checked>
+                                <label for="category-school">Школьная программа</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="category-oge" checked>
+                                <label for="category-oge">Подготовка к ОГЭ</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="category-ege" checked>
+                                <label for="category-ege">Подготовка к ЕГЭ</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="category-olympiad" checked>
+                                <label for="category-olympiad">Олимпиадная математика</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Класс</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="grade-5-6" checked>
+                                <label for="grade-5-6">5-6 класс</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="grade-7-8" checked>
+                                <label for="grade-7-8">7-8 класс</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="grade-9" checked>
+                                <label for="grade-9">9 класс</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="grade-10-11" checked>
+                                <label for="grade-10-11">10-11 класс</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Формат</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="format-group" checked>
+                                <label for="format-group">Групповые занятия</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="format-individual" checked>
+                                <label for="format-individual">Индивидуальные занятия</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="format-online" checked>
+                                <label for="format-online">Онлайн-курс</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Уровень</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="level-beginner" checked>
+                                <label for="level-beginner">Начальный</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="level-medium" checked>
+                                <label for="level-medium">Средний</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="level-advanced" checked>
+                                <label for="level-advanced">Продвинутый</label>
+                            </div>
+                        </div>
+                        <button class="reset-filters">Сбросить фильтры</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('1.jpg'); background-size: cover;">
+                        <div class="course-badge">Популярный</div>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">5-6 класс</span>
+                        <h3 class="course-title">Математика для средней школы</h3>
+                        <p class="course-description">Полный курс математики для 5-6 классов с углубленным изучением ключевых тем и подготовкой к олимпиадам.</p>
+                        <div class="course-meta">
+                            <span>36 занятий</span>
+                            <span>Александр Н.</span>
+                        </div>
+                        <div class="course-price">
+                            <s>24,000 ₽</s> 19,200 ₽
+                        </div>
+                        <a href="#" class="course-btn">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('1.jpg'); background-size: cover;">
+                        <div class="course-badge">Новый</div>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">7-8 класс</span>
+                        <h3 class="course-title">Алгебра и геометрия</h3>
+                        <p class="course-description">Систематизация знаний по алгебре и геометрии с упором на понимание, а не заучивание.</p>
+                        <div class="course-meta">
+                            <span>48 занятий</span>
+                            <span>Мария И.</span>
+                        </div>
+                        <div class="course-price">
+                            <s>32,000 ₽</s> 28,800 ₽
+                        </div>
+                        <a href="#" class="course-btn">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('1.jpg'); background-size: cover;">
+                        <div class="course-badge">Скидка 20%</div>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">9 класс</span>
+                        <h3 class="course-title">Подготовка к ОГЭ</h3>
+                        <p class="course-description">Полный курс подготовки к ОГЭ по математике с разбором всех типов задач и пробными вариантами.</p>
+                        <div class="course-meta">
+                            <span>60 занятий</span>
+                            <span>Иван П.</span>
+                        </div>
+                        <div class="course-price">
+                            <s>42,000 ₽</s> 33,600 ₽
+                        </div>
+                        <a href="#" class="course-btn">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('1.jpg'); background-size: cover;">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">10-11 класс</span>
+                        <h3 class="course-title">ЕГЭ профиль (базовый)</h3>
+                        <p class="course-description">Подготовка к базовому уровню ЕГЭ по математике с гарантией сдачи экзамена.</p>
+                        <div class="course-meta">
+                            <span>40 занятий</span>
+                            <span>Елена С.</span>
+                        </div>
+                        <div class="course-price">
+                            28,000 ₽
+                        </div>
+                        <a href="#" class="course-btn">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('1.jpg'); background-size: cover;">
+                        <div class="course-badge">Интенсив</div>
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">10-11 класс</span>
+                        <h3 class="course-title">ЕГЭ профиль (продвинутый)</h3>
+                        <p class="course-description">Углубленная подготовка к профильному ЕГЭ с разбором сложных задач (№13-19).</p>
+                        <div class="course-meta">
+                            <span>72 занятия</span>
+                            <span>Александр Н.</span>
+                        </div>
+                        <div class="course-price">
+                            <s>50,400 ₽</s> 45,360 ₽
+                        </div>
+                        <a href="#" class="course-btn">Подробнее</a>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('1.jpg'); background-size: cover;">
+                    </div>
+                    <div class="course-content">
+                        <span class="course-level">7-11 класс</span>
+                        <h3 class="course-title">Олимпиадная математика</h3>
+                        <p class="course-description">Развитие нестандартного мышления и решение олимпиадных задач различного уровня сложности.</p>
+                        <div class="course-meta">
+                            <span>30 занятий</span>
+                            <span>Иван П.</span>
+                        </div>
+                        <div class="course-price">
+                            36,000 ₽
+                        </div>
+                        <a href="#" class="course-btn">Подробнее</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="pagination">
+                <a href="#" class="page-link">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link active">3</a>
+                <a href="#" class="page-link">4</a>
+                <a href="#" class="page-link">5</a>
+                <a href="#" class="page-link">→</a>
+            </div>
+
+            <section class="benefits-section">
+                <h2>Почему выбирают наши курсы</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">👨‍🏫</div>
+                        <h3>Опытные преподаватели</h3>
+                        <p>Средний стаж наших педагогов - 12 лет</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📈</div>
+                        <h3>Доказанная эффективность</h3>
+                        <p>85% учеников улучшают оценки на 1-2 балла</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💻</div>
+                        <h3>Современная платформа</h3>
+                        <p>Удобный личный кабинет с отслеживанием прогресса</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔄</div>
+                        <h3>Гибкие условия</h3>
+                        <p>Возможность заморозки курса и переноса занятий</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Образовательный портал "МАТЕМАТИК". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Меню для мобильных устройств
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('nav-visible');
+        }
+
+        // Фильтрация курсов
+        document.querySelectorAll('.filter-option input').forEach(input => {
+            input.addEventListener('change', function() {
+                // Здесь можно добавить логику фильтрации курсов
+                console.log('Фильтр изменен');
+            });
+        });
+        
+        // Сброс фильтров
+        document.querySelector('.reset-filters').addEventListener('click', function() {
+            document.querySelectorAll('.filter-option input').forEach(input => {
+                input.checked = true;
+            });
+            // Здесь можно добавить логику сброса фильтрации
+        });
+    </script>
+</body>
+</html>

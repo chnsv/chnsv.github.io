@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О сайте | Образовательный портал по математике</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили */
+        :root {
+            --primary-dark: #345754;
+            --primary-medium: #5b9893;
+            --primary-light: #8abeb9;
+            --primary-extra-light: #d1e9e7;
+            --accent: #f5a623;
+            --text-dark: #2d3748;
+            --text-medium: #4a5568;
+            --text-light: #f8f9fa;
+            --primary-color: #345754;
+            --secondary-color: #5b9893;
+            --accent-color: #f5a623;
+            --light-color: #e8f4f3;
+            --dark-color: #2a4745;
+            --text-color: #333;
+            --text-light-color: #777;
+            --white: #ffffff;
+            --gray: #f5f7fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--gray);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .site-title {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .burger-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            position: relative;
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        li:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                transform: translateY(-150%);
+                transition: transform 0.3s;
+            }
+            
+            nav.nav-visible {
+                transform: translateY(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                padding-left: 15px;
+            }
+            
+            .catalog-header {
+                padding: 3rem 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .catalog-header h1 {
+                font-size: 2rem;
+            }
+            
+            .catalog-header p {
+                font-size: 1.1rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+        }
+        
+        /* Шапка страницы */
+        .about-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 3rem;
+        }
+        
+        .about-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.1)">∑</text><text x="70" y="50" font-family="Arial" font-size="14" fill="rgba(255,255,255,0.1)">π</text><text x="30" y="80" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.1)">∫</text></svg>');
+            opacity: 0.2;
+        }
+        
+        .about-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .about-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Основное содержимое */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+        
+        /* Блок с миссией */
+        .mission-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+        
+        .mission-text {
+            padding: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .mission-text h2 {
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-top: 0;
+        }
+        
+        .mission-image {
+            background: var(--primary-extra-light);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-medium);
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* Блок с преимуществами */
+        .features-section {
+            background: white;
+            border-radius: 10px;
+            padding: 3rem 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+        }
+        
+        .features-section h2 {
+            color: var(--primary-dark);
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-extra-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary-medium);
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        /* Блок с командой */
+        .team-section {
+            margin-bottom: 4rem;
+        }
+        
+        .team-section h2 {
+            color: var(--text-light);
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-photo {
+            height: 250px;
+            background: var(--primary-extra-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-medium);
+            font-size: 1.5rem;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-info p {
+            color: var(--text-medium);
+            margin-top: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--primary-medium);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Блок с цифрами */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        
+        .stats-section h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Блок с отзывами */
+        .testimonials-section {
+            margin-bottom: 4rem;
+        }
+        
+        .testimonials-section h2 {
+            color: var(--primary-dark);
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-dark);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-extra-light);
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-medium);
+        }
+        
+        .author-info h4 {
+            margin: 0;
+            color: var(--primary-dark);
+        }
+        
+        .author-info p {
+            margin: 0;
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+        
+        /* Блок с контактами */
+        .contact-section {
+            background: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contact-section h2 {
+            color: var(--primary-dark);
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            padding: 1rem;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-extra-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary-medium);
+            font-size: 1.2rem;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background: var(--primary-medium);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .about-header {
+                padding: 3rem 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .about-header h1 {
+                font-size: 2rem;
+            }
+            
+            .about-header p {
+                font-size: 1.1rem;
+            }
+            
+            .mission-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mission-image {
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .team-photo {
+            background-repeat: no-repeat;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container container">
+            <h1 class="site-title">МАТЕМАТИК</h1>
+            <div class="burger-menu" onclick="toggleMenu()">☰</div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="index.html">ГЛАВНАЯ</a></li>
+                    <li><a href="catalog.html">КАТАЛОГ КУРСОВ</a></li>
+                    <li>
+                        <a href="#">ШКОЛА</a>
+                        <div class="dropdown-content">
+                            <a href="math-5-6.html">Математика 5-6 класс</a>
+                            <a href="algebra-7-8.html">Алгебра и геометрия 7-8 класс</a>
+                        </div>
+                    </li>
+                    <li><a href="oge.html">ОГЭ</a></li>
+                    <li><a href="ege.html">ЕГЭ</a></li>
+                    <li>
+                        <a href="#">О НАС</a>
+                        <div class="dropdown-content">
+                            <a href="about-site.html">О сайте</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contacts.html">Контакты</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="about-header">
+        <h1>О нашем образовательном портале</h1>
+        <p>Мы помогаем ученикам освоить математику и успешно сдать экзамены через качественное онлайн-обучение</p>
+    </div>
+
+    <main class="about-container">
+        <section class="mission-section">
+            <div class="mission-text">
+                <h2>Наша миссия</h2>
+                <p>Мы создали этот образовательный портал, чтобы сделать изучение математики доступным, понятным и интересным для каждого ученика. Наша цель - помочь вам не просто подготовиться к экзаменам, но и по-настоящему понять и полюбить этот предмет.</p>
+                <p>Современные технологии позволяют нам предлагать интерактивные методы обучения, которые делают процесс подготовки эффективным и увлекательным. Мы верим, что математика - это не просто школьный предмет, а инструмент для развития логического мышления и решения реальных задач.</p>
+            </div>
+            <div class="mission-image" style="background-image: url('1.jpg'); background-size: cover; background-position: center;"></div>
+        </section>
+
+        <section class="features-section">
+            <h2>Почему выбирают нас</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Комплексные курсы</h3>
+                    <p>Полные программы подготовки от базовых тем до сложных разделов математики</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Опытные преподаватели</h3>
+                    <p>Занятия ведут педагоги с многолетним стажем подготовки к ОГЭ и ЕГЭ</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Удобный формат</h3>
+                    <p>Доступ к материалам 24/7 с любого устройства с интернетом</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Персональная статистика</h3>
+                    <p>Отслеживание прогресса и рекомендации по улучшению результатов</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Обратная связь</h3>
+                    <p>Возможность задавать вопросы преподавателям и получать развернутые ответы</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Доказанные результаты</h3>
+                    <p>Наши ученики consistently показывают результаты выше среднего</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <h2>Наша команда</h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-photo" style="background-image: url('teach_three.jpg'); background-size: cover; background-position: center;"></div>
+
+                    <div class="team-info">
+                        <h3>Александр Нестеров</h3>
+                        <p>Основатель, преподаватель математики</p>
+                        <div class="social-links">
+                            <a href="#">📱</a>
+                            <a href="#">✉️</a>
+                            <a href="#">🔗</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo" style="background-image: url('teach_one.jpeg'); background-size: cover; background-position: center;"></div>
+                    <div class="team-info">
+                        <h3>Мария Иванова</h3>
+                        <p>Преподаватель алгебры и геометрии</p>
+                        <div class="social-links">
+                            <a href="#">📱</a>
+                            <a href="#">✉️</a>
+                            <a href="#">🔗</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo" style="background-image: url('teach_three.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="team-info">
+                        <h3>Иван Петров</h3>
+                        <p>Преподаватель математики и физики</p>
+                        <div class="social-links">
+                            <a href="#">📱</a>
+                            <a href="#">✉️</a>
+                            <a href="#">🔗</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-photo" style="background-image: url('teach_two.jpg'); background-size: cover; background-position: center;"></div>
+                    <div class="team-info">
+                        <h3>Елена Смирнова</h3>
+                        <p>Методист, разработчик курсов</p>
+                        <div class="social-links">
+                            <a href="#">📱</a>
+                            <a href="#">✉️</a>
+                            <a href="#">🔗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h2>Мы в цифрах</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">7+</div>
+                    <p>Лет опыта в онлайн-образовании</p>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <p>Учеников прошли наши курсы</p>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">85%</div>
+                    <p>Учеников сдают экзамены на 4 и 5</p>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">200+</div>
+                    <p>Учебных материалов и тестов</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section">
+            <h2>Отзывы наших учеников</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            "Благодаря курсам на этом сайте я смог подготовиться к ЕГЭ по математике и поступить в желаемый вуз. Объяснения очень понятные, а система упражнений помогает закрепить материал."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">АС</div>
+                            <div class="author-info">
+                                <h4>Антон Соколов</h4>
+                                <p>Студент МГУ, 100 баллов на ЕГЭ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            "Я всегда боялась математики, но преподаватели на этом портале смогли объяснить все так, что я не только перестала бояться, но и полюбила этот предмет. ОГЭ сдала на 5!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">КМ</div>
+                            <div class="author-info">
+                                <h4>Карина Миронова</h4>
+                                <p>Ученица 9 класса</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            "Как родитель, я оцениваю профессиональный подход и внимание к каждому ученику. Мой сын занимался здесь весь год, и его результаты в школе значительно улучшились."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">ОП</div>
+                            <div class="author-info">
+                                <h4>Ольга Петрова</h4>
+                                <p>Мама ученика 8 класса</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <h2>Свяжитесь с нами</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <p><strong>Адрес:</strong></p>
+                            <p>г. Краснодар, ул. Ставропольская, 149</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <p><strong>Телефон:</strong></p>
+                            <p>+7 (111) 222-33-44</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <p><strong>Email:</strong></p>
+                            <p>info@matematik-portal.ru</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <p><strong>Часы работы:</strong></p>
+                            <p>Пн-Пт: 9:00 - 18:00</p>
+                            <p>Сб-Вс: 10:00 - 15:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="contact-name">Ваше имя</label>
+                            <input type="text" id="contact-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-subject">Тема</label>
+                            <input type="text" id="contact-subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-message">Сообщение</label>
+                            <textarea id="contact-message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Образовательный портал. Все права защищены.</p>
+    </footer>
+    <script>
+        // Меню для мобильных устройств
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('nav-visible');
+        }
+    </script>
+</body>
+</html>

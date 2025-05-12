@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка к ОГЭ по математике | Образовательный портал</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили */
+        :root {
+            --primary-dark: #345754;
+            --primary-medium: #5b9893;
+            --primary-light: #8abeb9;
+            --primary-extra-light: #d1e9e7;
+            --text-dark: #2d3748;
+            --text-medium: #4a5568;
+            --text-light: #f8f9fa;
+            --primary-color: #345754;
+            --secondary-color: #5b9893;
+            --accent-color: #f5a623;
+            --light-color: #e8f4f3;
+            --dark-color: #2a4745;
+            --text-color: #333;
+            --text-light-color: #777;
+            --white: #ffffff;
+            --gray: #f5f7fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-color);
+            background-color: var(--gray);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .site-title {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .burger-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            position: relative;
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        li:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                transform: translateY(-150%);
+                transition: transform 0.3s;
+            }
+            
+            nav.nav-visible {
+                transform: translateY(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                padding-left: 15px;
+            }
+            
+            .catalog-header {
+                padding: 3rem 1rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .catalog-header h1 {
+                font-size: 2rem;
+            }
+            
+            .catalog-header p {
+                font-size: 1.1rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            font-size: 14px;
+        }
+        
+        /* Шапка страницы */
+        .oge-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .oge-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="20" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.1)">ОГЭ</text><text x="70" y="50" font-family="Arial" font-size="12" fill="rgba(255,255,255,0.1)">2025</text><text x="30" y="80" font-family="Arial" font-size="8" fill="rgba(255,255,255,0.1)">МАТЕМАТИКА</text></svg>');
+            opacity: 0.3;
+        }
+        
+        .oge-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .oge-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Основное содержимое */
+        .oge-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* Блок с информацией об экзамене */
+        .exam-info {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary-dark);
+        }
+        
+        .exam-info h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        .exam-structure {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .module-card {
+            background: var(--primary-extra-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .module-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module-card h3::before {
+            content: "";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background-color: var(--primary-medium);
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>');
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+        
+        .algebra-module h3::before {
+            background-color: var(--primary-color);
+        }
+        
+        .geometry-module h3::before {
+            background-color: var(--primary-medium);
+        }
+        
+        .real-math-module h3::before {
+            background-color: var(--accent);
+        }
+        
+        /* Блок с вариантами */
+        .variants-section {
+            margin-bottom: 3rem;
+        }
+        
+        .variants-section h2 {
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .variant-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .variant-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border-top: 3px solid var(--primary-medium);
+        }
+        
+        .variant-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .variant-card h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        .variant-card .btn {
+            display: inline-block;
+            background: var(--primary-medium);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        
+        .variant-card .btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Блок с советами */
+        .tips-section {
+            background: var(--primary-extra-light);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tips-section h2 {
+            color: var(--primary-dark);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tip-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .tip-card h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tip-card h3::before {
+            content: "★";
+            color: var(--accent);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Таймер и регистрация */
+        .action-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .countdown {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .countdown h2 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-medium);
+            margin: 1rem 0;
+        }
+        
+        .signup-form {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .signup-form h2 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-medium);
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .submit-btn {
+            background: var(--primary-medium);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .oge-header h1 {
+                font-size: 2rem;
+            }
+            
+            .oge-header p {
+                font-size: 1rem;
+            }
+            
+            .exam-structure, .variant-cards, .tips-grid, .action-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container container">
+            <h1 class="site-title">МАТЕМАТИК</h1>
+            <div class="burger-menu" onclick="toggleMenu()">☰</div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="index.html">ГЛАВНАЯ</a></li>
+                    <li><a href="catalog.html">КАТАЛОГ КУРСОВ</a></li>
+                    <li>
+                        <a href="#">ШКОЛА</a>
+                        <div class="dropdown-content">
+                            <a href="math-5-6.html">Математика 5-6 класс</a>
+                            <a href="algebra-7-8.html">Алгебра и геометрия 7-8 класс</a>
+                        </div>
+                    </li>
+                    <li><a href="oge.html">ОГЭ</a></li>
+                    <li><a href="ege.html">ЕГЭ</a></li>
+                    <li>
+                        <a href="#">О НАС</a>
+                        <div class="dropdown-content">
+                            <a href="about-site.html">О сайте</a>
+                            <a href="reviews.html">Отзывы</a>
+                            <a href="contacts.html">Контакты</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="oge-header">
+        <h1>Подготовка к ОГЭ по математике</h1>
+        <p>Полный курс подготовки к основному государственному экзамену для 9 классов</p>
+    </div>
+
+    <main class="oge-container">
+        <section class="exam-info">
+            <h2>Структура экзамена</h2>
+            <p>ОГЭ по математике состоит из двух модулей: "Алгебра" и "Геометрия", а также задач на реальную математику. Всего в работе 25 заданий.</p>
+            
+            <div class="exam-structure">
+                <div class="module-card algebra-module">
+                    <h3>Модуль "Алгебра"</h3>
+                    <ul>
+                        <li>17 заданий</li>
+                        <li>Часть 1: 14 заданий с кратким ответом</li>
+                        <li>Часть 2: 3 задания с развернутым ответом</li>
+                        <li>Максимальный балл: 20</li>
+                    </ul>
+                </div>
+                
+                <div class="module-card geometry-module">
+                    <h3>Модуль "Геометрия"</h3>
+                    <ul>
+                        <li>6 заданий</li>
+                        <li>Часть 1: 3 задания с кратким ответом</li>
+                        <li>Часть 2: 3 задания с развернутым ответом</li>
+                        <li>Максимальный балл: 12</li>
+                    </ul>
+                </div>
+                
+                <div class="module-card real-math-module">
+                    <h3>Реальная математика</h3>
+                    <ul>
+                        <li>2 задания в модуле "Алгебра"</li>
+                        <li>Практико-ориентированные задачи</li>
+                        <li>Оцениваются в общий балл модуля</li>
+                        <li>Примеры: расчеты, графики, диаграммы</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="variants-section">
+            <h2>Тренировочные варианты</h2>
+            
+            <div class="variant-cards">
+                <div class="variant-card">
+                    <h3>Базовый вариант</h3>
+                    <p>Стандартный вариант ОГЭ для начальной подготовки</p>
+                    <p>25 заданий | 3 часа 55 минут</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Углубленный вариант</h3>
+                    <p>Для тех, кто претендует на высокий балл</p>
+                    <p>25 заданий | 3 часа 55 минут</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Пробный вариант 2025</h3>
+                    <p>Актуальный демонстрационный вариант ФИПИ</p>
+                    <p>25 заданий | 3 часа 55 минут</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+                
+                <div class="variant-card">
+                    <h3>Тематический тест</h3>
+                    <p>Задания по конкретным темам алгебры и геометрии</p>
+                    <p>15 заданий | 1 час 30 минут</p>
+                    <a href="#" class="btn">Начать тест</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="tips-section">
+            <h2>Советы по подготовке</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Распределение времени</h3>
+                    <p>Первые 20 заданий решайте не более 10 минут каждое. На сложные задачи оставьте больше времени.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Проверка ответов</h3>
+                    <p>Всегда перепроверяйте вычисления, особенно в задачах с кратким ответом.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Геометрические задачи</h3>
+                    <p>Делайте чертежи даже к простым задачам - это поможет избежать ошибок.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <h3>Формулы и теоремы</h3>
+                    <p>Выучите все основные формулы и теоремы - они не будут предоставлены на экзамене.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="action-section">
+            <div class="countdown">
+                <h2>До ОГЭ осталось:</h2>
+                <div class="timer" id="countdown-timer">120 дней 14 часов</div>
+                <p>Начните подготовку уже сегодня!</p>
+            </div>
+            
+            <div class="signup-form">
+                <h2>Записаться на курс</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">ФИО ученика</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="class">Класс</label>
+                        <select id="class" required>
+                            <option value="">Выберите класс</option>
+                            <option value="8">8 класс</option>
+                            <option value="9">9 класс</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Отправить заявку</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Образовательный портал. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Меню для мобильных устройств
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('nav-visible');
+        }
+
+        // Скрипт для таймера
+        function updateCountdown() {
+            const examDate = new Date('2025-05-20T00:00:00'); // Предполагаемая дата ОГЭ
+            const now = new Date();
+            const diff = examDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('countdown-timer').textContent = 
+                `${days} дней ${hours} часов`;
+        }
+        
+        // Обновляем таймер сразу и каждую минуту
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+    </script>
+</body>
+</html>
