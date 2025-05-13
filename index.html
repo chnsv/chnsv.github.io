@@ -40,7 +40,6 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
         }
 
         /* Шапка */
@@ -252,6 +251,12 @@
             text-align: center;
         }
 
+        .teachers .container {
+            padding: 0;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
         .teachers h2 {
             font-size: 32px;
             color: var(--primary-color);
@@ -262,10 +267,12 @@
             background: var(--white);
             border-radius: 10px;
             padding: 30px;
-            margin: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
+            width: 100% !important;
             max-width: 350px;
+            height: 100%;
+            margin: 0 auto; /* Центрируем карточку */
         }
 
         .teacher-card:hover {
@@ -282,7 +289,7 @@
             margin-bottom: 20px;
         }
 
-        .teacher-card h2 {
+        .teacher-card h3 {
             font-size: 22px;
             margin-bottom: 10px;
             color: var(--primary-color);
@@ -303,7 +310,7 @@
             flex: 1;
         }
 
-        .stat h3 {
+        .stat h4 {
             font-size: 24px;
             color: var(--secondary-color);
             margin-bottom: 5px;
@@ -312,6 +319,42 @@
         .stat p {
             font-size: 14px;
             color: var(--text-light);
+        }
+
+        /* Карусель преподавателей */
+        .swiper-container {
+            width: 100%;
+            padding: 20px 0 50px;
+            margin: 0;
+        }
+
+        .swiper-wrapper {
+            padding: 0 20px; /* Добавляем внутренние отступы */
+            box-sizing: border-box;
+        }
+
+        .swiper-slide {
+            width: 85% !important; /* Карточка занимает 85% ширины */
+            margin: 0 auto; /* Центрируем карточку */
+            padding: 0 5px; /* Небольшие отступы между карточками */
+            box-sizing: border-box;
+        }
+
+        .swiper-pagination {
+            position: relative;
+            bottom: 0;
+            margin-top: 20px;
+        }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background-color: var(--light-color);
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background-color: var(--secondary-color);
         }
 
         /* Форма записи */
@@ -594,72 +637,22 @@
             font-size: 14px;
         }
 
-        /* Swiper стили */
-        .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            background-color: var(--light-color);
-            opacity: 1;
-        }
-
-        .swiper-pagination-bullet-active {
+        /* Кнопка авторизации */
+        #authButton {
             background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #authButton:hover {
+            background-color: var(--primary-color);
         }
 
-        /* Адаптивность */
-        @media (max-width: 992px) {
-            .course-signup {
-                flex-direction: column;
-                background: linear-gradient(to bottom, var(--primary-color) 50%, var(--white) 50%);
-            }
-            
-            .course-info, .signup-form {
-                padding: 40px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .burger-menu {
-                display: block;
-            }
-            
-            nav {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                padding: 20px;
-                transform: translateY(-150%);
-                transition: transform 0.3s;
-            }
-            
-            nav.nav-visible {
-                transform: translateY(0);
-            }
-            
-            nav ul {
-                flex-direction: column;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-            }
-            
-            .dropdown-content {
-                position: static;
-                box-shadow: none;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .teacher-card {
-                max-width: 100%;
-            }
-        }
         /* Адаптивность */
         @media (max-width: 992px) {
             .course-signup {
@@ -749,12 +742,17 @@
         }
 
         @media (max-width: 480px) {
+            header {
+                padding: 0 15px;
+            }
             .header-container {
+                flex-wrap: wrap;
                 padding: 10px 0;
             }
-            
+    
             .site-title {
                 font-size: 22px;
+                margin-right: auto;
             }
             
             .hero {
@@ -838,11 +836,11 @@
                 height: 120px;
             }
             
-            .teacher-card h2 {
+            .teacher-card h3 {
                 font-size: 20px;
             }
             
-            .stat h3 {
+            .stat h4 {
                 font-size: 20px;
             }
             
@@ -881,20 +879,33 @@
                 font-size: 22px;
             }
         }
-        #authButton {
-            background-color: var(--secondary-color);
-            color: var(--white);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
+
+        @media (min-width: 769px) {
+            .swiper-pagination {
+                display: none;
+            }
+                        .teachers .container {
+                padding: 0 20px;
+                max-width: 1200px;
+            }
+
+            .swiper-slide {
+                width: 33.333% !important;
+                padding: 0 15px;
+            }
+
+            .swiper-wrapper {
+                padding: 0;
+                transform: translate3d(0,0,0) !important;
+            }
         }
-        
-        #authButton:hover {
-            background-color: var(--primary-color);
+
+        /* Гарантированно убираем горизонтальный скролл */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
         }
+
     </style>
 </head>
 <body>
@@ -969,19 +980,19 @@
                         <div class="swiper-slide">
                             <div class="teacher-card">
                                 <img src="teach_one.jpeg" alt="Александр Нестеров" class="teacher-photo">
-                                <h2>Александр Нестеров</h2>
+                                <h3>Александр Нестеров</h3>
                                 <p>преподает профилирующую математику ЕГЭ</p>
                                 <div class="stats">
                                     <div class="stat">
-                                        <h3>12 лет</h3>
+                                        <h4>12 лет</h4>
                                         <p>готовит к ЕГЭ</p>
                                     </div>
                                     <div class="stat">
-                                        <h3>25</h3>
+                                        <h4>25</h4>
                                         <p>стобальников</p>
                                     </div>
                                     <div class="stat">
-                                        <h3>2 728</h3>
+                                        <h4>2 728</h4>
                                         <p>учеников сдали на 80+</p>
                                     </div>
                                 </div>
@@ -990,19 +1001,19 @@
                         <div class="swiper-slide">
                             <div class="teacher-card">
                                 <img src="teach_two.jpg" alt="Мария Иванова" class="teacher-photo">
-                                <h2>Мария Иванова</h2>
+                                <h3>Мария Иванова</h3>
                                 <p>преподает алгебру и геометрию</p>
                                 <div class="stats">
                                     <div class="stat">
-                                        <h3>10 лет</h3>
+                                        <h4>10 лет</h4>
                                         <p>готовит к ЕГЭ</p>
                                     </div>
                                     <div class="stat">
-                                        <h3>30</h3>
+                                        <h4>30</h4>
                                         <p>стобальников</p>
                                     </div>
                                     <div class="stat">
-                                        <h3>3 000</h3>
+                                        <h4>3 000</h4>
                                         <p>учеников сдали на 80+</p>
                                     </div>
                                 </div>
@@ -1011,19 +1022,19 @@
                         <div class="swiper-slide">
                             <div class="teacher-card">
                                 <img src="teach_three.jpg" alt="Иван Петров" class="teacher-photo">
-                                <h2>Иван Петров</h2>
+                                <h3>Иван Петров</h3>
                                 <p>преподает математику и физику</p>
                                 <div class="stats">
                                     <div class="stat">
-                                        <h3>8 лет</h3>
+                                        <h4>8 лет</h4>
                                         <p>готовит к ЕГЭ</p>
                                     </div>
                                     <div class="stat">
-                                        <h3>15</h3>
+                                        <h4>15</h4>
                                         <p>стобальников</p>
                                     </div>
                                     <div class="stat">
-                                        <h3>1 500</h3>
+                                        <h4>1 500</h4>
                                         <p>учеников сдали на 80+</p>
                                     </div>
                                 </div>
@@ -1208,24 +1219,35 @@
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        // Инициализация Swiper
+        // Инициализация Swiper с жесткими ограничениями для мобильных
         const swiper = new Swiper('.swiper-container', {
             loop: true,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
+                dynamicBullets: true
             },
+            slidesPerView: 'auto', // Автоматическая ширина слайдов
+            centeredSlides: true, // Центрируем активный слайд
+            spaceBetween: 10, // Расстояние между слайдами
+            resistanceRatio: 0, // Отключаем "упругость" при скролле
+            preventClicks: false,
             breakpoints: {
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
-                992: {
+                769: {
                     slidesPerView: 3,
                     spaceBetween: 30,
+                    centeredSlides: false,
+                    pagination: {
+                        enabled: false
+                    }
                 }
             }
         });
+
+        // Блокируем горизонтальный скролл на touch-устройствах
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
 
         // Меню для мобильных устройств
         function toggleMenu() {
@@ -1253,31 +1275,23 @@
             document.getElementById('authModal').style.display = 'none';
         }
         
-        // Переключение на форму регистрации (если нужно)
+        // Переключение на форму регистрации
         function showRegisterForm() {
-            alert('Регистрация пока не реализована'); // Заглушка
-        }
-
-        let currentUser = null;
-
-        // Показ формы регистрации
-        function showRegisterForm() {
-        document.getElementById('loginFormContainer').style.display = 'none';
-        document.getElementById('registerFormContainer').style.display = 'block';
+            document.getElementById('loginFormContainer').style.display = 'none';
+            document.getElementById('registerFormContainer').style.display = 'block';
         }
         
-        // Показ формы входа
+        // Переключение на форму входа
         function showLoginForm() {
-        document.getElementById('registerFormContainer').style.display = 'none';
-        document.getElementById('loginFormContainer').style.display = 'block';
-        }    
-        
-         // Генерация случайного теста
+            document.getElementById('registerFormContainer').style.display = 'none';
+            document.getElementById('loginFormContainer').style.display = 'block';
+        }
+
+        // Генерация случайного теста
         function generateRandomTest() {
             const questionsContainer = document.getElementById('questions');
             questionsContainer.innerHTML = '';
             
-            // Массив возможных вопросов с вариантами ответов
             const questionPool = [
                 {
                     question: "Решите уравнение: 2x + 5 = 15",
@@ -1326,15 +1340,12 @@
                 }
             ];
 
-            // Перемешиваем вопросы
             const shuffledQuestions = [...questionPool].sort(() => Math.random() - 0.5);
             
-            // Создаем контейнер для вопросов
             const testContainer = document.createElement('div');
             testContainer.id = 'testContainer';
             questionsContainer.appendChild(testContainer);
             
-            // Создаем кнопку "Далее"
             const nextButton = document.createElement('button');
             nextButton.textContent = 'Далее';
             nextButton.className = 'cta-button';
@@ -1343,11 +1354,9 @@
             nextButton.addEventListener('click', showNextQuestion);
             questionsContainer.appendChild(nextButton);
             
-            // Переменные для отслеживания состояния теста
             let currentQuestionIndex = 0;
             const userAnswers = [];
             
-            // Показываем первый вопрос
             showQuestion(currentQuestionIndex);
             
             function showQuestion(index) {
@@ -1393,7 +1402,6 @@
             }
             
             function showNextQuestion() {
-                // Сохраняем ответ пользователя
                 const selectedAnswer = testContainer.querySelector('input[type="radio"]:checked');
                 if (selectedAnswer) {
                     userAnswers.push({
@@ -1439,7 +1447,6 @@
                     `;
                 }
                 
-                // Показываем результаты
                 testContainer.innerHTML = `
                     <div style="padding: 20px; background: #f8f8f8; border-radius: 5px;">
                         <h3>Тест завершен!</h3>
@@ -1451,19 +1458,14 @@
                     </div>
                 `;
                 
-                // Скрываем кнопку "Далее"
                 nextButton.style.display = 'none';
-                
-                // Прокручиваем к результатам
                 testContainer.scrollIntoView({ behavior: 'smooth' });
             }
         }
+        
         // Обработчик для кнопки "Начать тестирование"
         document.getElementById('startTest').addEventListener('click', function() {
-            // Показываем модальное окно
             document.getElementById('modal').style.display = 'block';
-            
-            // Генерируем тест
             generateRandomTest();
         });
 
@@ -1471,6 +1473,7 @@
         document.querySelector('.modal .close').addEventListener('click', function() {
             document.getElementById('modal').style.display = 'none';
         });
+        
         // Закрытие модального окна при клике вне его
         window.addEventListener('click', function(event) {
             if (event.target == document.getElementById('modal')) {
@@ -1479,7 +1482,7 @@
         });
 
         document.getElementById('mathTest').addEventListener('submit', function(e) {
-            e.preventDefault(); // Это предотвратит отправку формы
+            e.preventDefault();
         });
     </script>
 </body>
